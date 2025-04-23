@@ -489,6 +489,176 @@
                 grid-template-columns: 1fr;
             }
         }
+        .button {
+    display: inline-block;
+    padding: 8px 10px;
+    background-color: #007bff; /* Blue color */
+    color: white;
+    text-align: center;
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px; /* Rounded corners */
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+/* Chatbot Styles */
+#chatbot-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+#chatbot-header {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+#chatbot-messages {
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#chatbot-messages .message {
+    margin-bottom: 10px;
+}
+
+#chatbot-messages .user-message {
+    text-align: right;
+    color: #2c3e50;
+}
+
+#chatbot-messages .bot-message {
+    text-align: left;
+    color: #3498db;
+}
+
+#chatbot-form {
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+#chatbot-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    font-size: 14px;
+}
+
+#chatbot-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+#chatbot-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#chatbot-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+#prepare-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 80%;
+    max-width: 500px;
+}
+#forgot-password-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 80%;
+    max-width: 400px;
+}
+
+#forgot-password-modal .container {
+    text-align: center;
+}
+
+#forgot-password-modal h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+#forgot-password-modal .form-group {
+    margin-bottom: 20px;
+}
+
+#forgot-password-modal .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+#forgot-password-modal .btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#forgot-password-modal .btn:hover {
+    background-color: #2980b9;
+}
     </style>
 </head>
 
@@ -499,16 +669,13 @@
             <nav>
                 <div class="logo">Next<span>Hire</span></div>
                 <ul class="nav-links">
-                    <li><a href="#" class="active">Home</a></li>
-                    <li><a href="#jobs">Jobs</a></li>
-                    <li><a href="#companies">Companies</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="./stats.html">Statistics</a></li>
-
+                    
+                    
                 </ul>
                 <div>
-                    <a href="#login" class="btn">Login</a>
+                    <a href="./stats.html" class="button">Statistics</a>
+                    <a href="./index.html" class="btn" id="auth-button">Login</a>
+                    
                 </div>
             </nav>
         </div>
@@ -552,8 +719,7 @@
                             <button type="submit" class="btn" style="width: 100%;">Login</button>
                         </div>
                         <p style="text-align: center;">
-                            <a href="#forgot-password" style="color: #3498db; text-decoration: none;">Forgot
-                                Password?</a>
+                            <a href="#forgot-password" style="color: #3498db; text-decoration: none;">Forgot Password?</a>
                         </p>
                     </form>
                     <form id="register-form" style="display: none;">
@@ -678,12 +844,12 @@
                     <div class="sidebar">
                         <ul class="sidebar-menu">
                             <li><a href="#overview" class="active">Dashboard</a></li>
-                            <li><a href="#profile">My Profile</a></li>
+                            <!-- <li><a href="#profile">My Profile</a></li>
                             <li><a href="#applications">Applications</a></li>
                             <li><a href="#interviews">Interviews</a></li>
                             <li><a href="#resume">Resume Builder</a></li>
                             <li><a href="#settings">Settings</a></li>
-                            <li><a href="#logout">Logout</a></li>
+                            <li><a href="#logout">Logout</a></li> -->
                         </ul>
                     </div>
                     <div class="content-area">
@@ -781,7 +947,85 @@
                 </div>
             </div>
         </section>
+        <section id="application-form" style="display: none;">
+            <div class="container">
+                <h2>Job Application Form</h2>
+                <form id="job-application-form">
+                    <div class="form-group">
+                        <label for="applicant-name">Full Name</label>
+                        <input type="text" id="applicant-name" name="applicant-name" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant-email">Email</label>
+                        <input type="email" id="applicant-email" name="applicant-email" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant-branch">Branch</label>
+                        <input type="text" id="applicant-branch" name="applicant-branch" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-title">Job Title</label>
+                        <input type="text" id="job-title" name="job-title" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-company">Company</label>
+                        <input type="text" id="job-company" name="job-company" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="job-description">Job Description</label>
+                        <textarea id="job-description" name="job-description" rows="4" readonly></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cv-upload">Upload CV</label>
+                        <input type="file" id="cv-upload" name="cv-upload" accept=".pdf,.doc,.docx" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn" style="width: 100%;">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <div id="prepare-modal" style="display: none;">
+            <div class="container">
+                <h2>Interview Preparation</h2>
+                <div id="interview-questions">
+                    <!-- Questions will be injected here by JavaScript -->
+                </div>
+                <button class="btn" id="close-prepare-modal">Close</button>
+            </div>
+        </div>
+        <div id="forgot-password-modal" style="display: none;">
+            <div class="container">
+                <h2>Reset Password</h2>
+                <form id="forgot-password-form">
+                    <div class="form-group">
+                        <label for="reset-email">Enter your email or registration number</label>
+                        <input type="text" id="reset-email" name="reset-email" placeholder="Email or Registration Number" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn" style="width: 100%;">Send Reset Link</button>
+                    </div>
+                </form>
+                <button class="btn" id="close-forgot-password-modal" style="margin-top: 10px;">Close</button>
+            </div>
+        </div>
 
+
+        
+       
+
+        <div id="chatbot-container" style="display: none;">
+            <div id="chatbot-header">
+                <span>Placement Bot</span>
+                <button id="chatbot-close">✖</button>
+            </div>
+            <div id="chatbot-messages"></div>
+            <form id="chatbot-form">
+                <input type="text" id="chatbot-input" placeholder="Ask me something..." required />
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <button id="chatbot-toggle">💬</button>
 
 
 
@@ -796,7 +1040,7 @@
                 const studentDatabase = [
                     {
                         name: "Aarav Patel",
-                        regNumber: "CSE2025001",
+                        regNumber: "23BCE1400",
                         email: "aarav.patel@college.edu",
                         branch: "Computer Science Engineering",
                         cgpa: 8.9,
@@ -839,9 +1083,9 @@
                         ]
                     },
                     {
-                        name: "Aarav Catel",
-                        regNumber: "ECE2025002",
-                        email: "aarav.catel@college.edu",
+                        name: "Mohan Hatel",
+                        regNumber: "23BCE1420",
+                        email: "mohan.hatel@college.edu",
                         branch: "Electrical and Computer Engineering",
                         cgpa: 8.2,
                         graduationYear: 2025,
@@ -889,7 +1133,196 @@
                                 status: "Upcoming"
                             }
                         ]
-                    }
+                    },{
+    "name": "Nisha Verma",
+    "regNumber": "23BCE1555",
+    "email": "nisha.verma@college.edu",
+    "branch": "Information Technology",
+    "cgpa": 9.1,
+    "graduationYear": 2025,
+    "recommendedJobs": [
+        {
+            "title": "Data Analyst",
+            "company": "DataVerse Analytics",
+            "minCGPA": 8.7,
+            "tags": ["Python", "SQL", "Tableau"],
+            "deadline": "2024-07-20",
+            "description": "Analyze and visualize business data to derive actionable insights."
+        },
+        {
+            "title": "Backend Developer",
+            "company": "CloudCore Systems",
+            "minCGPA": 8.3,
+            "tags": ["Node.js", "Express", "AWS"],
+            "deadline": "2024-07-30",
+            "description": "Build and maintain server-side APIs with cloud-based integrations."
+        }
+    ],
+    "interviews": [
+        {
+            "company": "DataVerse Analytics",
+            "date": "2024-06-20",
+            "time": "11:00 AM",
+            "type": "HR Round",
+            "round": "Final Round",
+            "status": "Upcoming"
+        },
+        {
+            "company": "Microsoft",
+            "date": "2024-07-05",
+            "time": "01:30 PM",
+            "type": "Technical Interview",
+            "round": "Second Round",
+            "status": "Upcoming"
+        }
+    ]
+},{
+    "name": "Sohan Gupta",
+    "regNumber": "23BCE1501",
+    "email": "sohangupta@college.edu",
+    "branch": "Artificial Intelligence and Data Science",
+    "cgpa": 8.6,
+    "graduationYear": 2025,
+    "recommendedJobs": [
+        {
+            "title": "AI/ML Engineer",
+            "company": "NeuralCore AI",
+            "minCGPA": 8.5,
+            "tags": ["Python", "TensorFlow", "Machine Learning"],
+            "deadline": "2024-07-25",
+            "description": "Develop machine learning pipelines and production-grade AI solutions."
+        },
+        {
+            "title": "Data Scientist Intern",
+            "company": "InsightX Labs",
+            "minCGPA": 8.0,
+            "tags": ["Pandas", "Scikit-learn", "Power BI"],
+            "deadline": "2024-08-05",
+            "description": "Assist in statistical analysis and predictive modeling tasks."
+        },
+        {
+            "title": "Embedded Systems Engineer",
+            "company": "ChipCircuit Technologies",
+            "minCGPA": 8.0,
+            "tags": ["C", "Verilog", "Microcontrollers"],
+            "deadline": "2024-07-22",
+            "description": "Design and debug firmware for embedded IoT devices."
+        }
+    ],
+    "interviews": [
+        {
+            "company": "NeuralCore AI",
+            "date": "2024-06-18",
+            "time": "09:30 AM",
+            "type": "Technical Interview",
+            "round": "Second Round",
+            "status": "Upcoming"
+        },
+        {
+            "company": "TCS Digital",
+            "date": "2024-06-28",
+            "time": "12:00 PM",
+            "type": "Managerial Round",
+            "round": "Final",
+            "status": "Upcoming"
+        },
+        
+    ]
+},{
+    "name": "Aadil Hasan",
+    "regNumber": "23BCE5000",
+    "email": "aadil.hasan@college.edu",
+    "branch": "Electronics and Communication Engineering",
+    "cgpa": 8.2,
+    "graduationYear": 2025,
+    "recommendedJobs": [
+        {
+            "title": "Embedded Systems Engineer",
+            "company": "ChipCircuit Technologies",
+            "minCGPA": 8.0,
+            "tags": ["C", "Verilog", "Microcontrollers"],
+            "deadline": "2024-07-22",
+            "description": "Design and debug firmware for embedded IoT devices."
+        },
+        {
+            "title": "Systems Engineer",
+            "company": "Accenture Solutions",
+            "minCGPA": 7.5,
+            "tags": ["Linux", "Python", "Networking"],
+            "deadline": "2024-07-29",
+            "description": "Work on system integrations and enterprise deployment strategies."
+        }
+    ],
+    "interviews": [
+        {
+            "company": "ChipCircuit Technologies",
+            "date": "2024-06-22",
+            "time": "10:45 AM",
+            "type": "Technical Round",
+            "round": "First",
+            "status": "Upcoming"
+        },
+        {
+            "company": "Infosys",
+            "date": "2024-07-01",
+            "time": "03:00 PM",
+            "type": "Behavioral Interview",
+            "round": "Final",
+            "status": "Upcoming"
+        }
+    ]
+},{
+    "name": "Vedant Agarwal",
+    "regNumber": "23BCE1483",
+    "email": "vedant.agarwal@college.edu",
+    "branch": "Computer Science Engineering (Cybersecurity)",
+    "cgpa": 9.3,
+    "graduationYear": 2025,
+    "recommendedJobs": [
+        {
+            "title": "Security Analyst",
+            "company": "CyberSentinel Inc.",
+            "minCGPA": 9.0,
+            "tags": ["Ethical Hacking", "Kali Linux", "SIEM"],
+            "deadline": "2024-07-18",
+            "description": "Monitor and mitigate security threats across digital platforms."
+        },
+        {
+            "title": "DevSecOps Engineer",
+            "company": "ShieldWare Technologies",
+            "minCGPA": 8.8,
+            "tags": ["DevOps", "Docker", "OWASP"],
+            "deadline": "2024-07-27",
+            "description": "Integrate security practices into CI/CD workflows."
+        },
+        {
+            "title": "Embedded Systems Engineer",
+            "company": "ChipCircuit Technologies",
+            "minCGPA": 8.0,
+            "tags": ["C", "Verilog", "Microcontrollers"],
+            "deadline": "2024-07-22",
+            "description": "Design and debug firmware for embedded IoT devices."
+        }
+    ],
+    "interviews": [
+        {
+            "company": "CyberSentinel Inc.",
+            "date": "2024-06-25",
+            "time": "04:00 PM",
+            "type": "Technical Interview",
+            "round": "Second Round",
+            "status": "Upcoming"
+        },
+        {
+            "company": "HCL CyberOps",
+            "date": "2024-07-08",
+            "time": "11:30 AM",
+            "type": "Aptitude + HR",
+            "round": "First Round",
+            "status": "Upcoming"
+        }
+    ]
+}
                 ];
 
                 // Function to get student data by registration number
@@ -914,48 +1347,160 @@
                         document.getElementById("profile-initials").setAttribute('data-initials', initials);
                     }
                 }
+                const jobApplicationForm = document.getElementById('job-application-form');
+jobApplicationForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-                // Function to display upcoming interviews
-                function displayUpcomingInterviews(student) {
-                    const interviewsContainer = document.getElementById('upcoming-interviews');
-                    interviewsContainer.innerHTML = '';  // Clear previous content
-                    student.interviews.forEach(interview => {
-                        const interviewCard = `
-                            <div class="job-card">
-                                <h3>${interview.type}</h3>
-                                <p class="company">${interview.company}</p>
-                                <p class="location">📅 ${interview.date} | 🕒 ${interview.time}</p>
-                                <p class="salary">🔄 ${interview.round}</p>
-                                <p>Status: ${interview.status}</p>
-                                <a href="#interview-detail" class="btn">Prepare</a>
-                            </div>
-                        `;
-                        interviewsContainer.innerHTML += interviewCard;
-                    });
-                }
+    const cvFile = document.getElementById('cv-upload').files[0];
+    if (!cvFile) {
+        alert('Please upload your CV before submitting.');
+        return;
+    }
+
+    alert('Your application has been submitted successfully!');
+
+    // Reset the form and redirect back to the dashboard
+    jobApplicationForm.reset();
+    document.getElementById('application-form').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+});
+
+                
+function displayUpcomingInterviews(student) {
+    const interviewsContainer = document.getElementById('upcoming-interviews');
+    interviewsContainer.innerHTML = ''; // Clear previous content
+    student.interviews.forEach((interview, index) => {
+        const interviewCard = `
+            <div class="job-card">
+                <h3>${interview.type}</h3>
+                <p class="company">${interview.company}</p>
+                <p class="location">📅 ${interview.date} | 🕒 ${interview.time}</p>
+                <p class="salary">🔄 ${interview.round}</p>
+                <p>Status: ${interview.status}</p>
+                <button class="btn prepare-btn" data-index="${index}">Prepare</button>
+            </div>
+        `;
+        interviewsContainer.innerHTML += interviewCard;
+    });
+
+    // Add event listeners to "Prepare" buttons
+    const prepareButtons = document.querySelectorAll('.prepare-btn');
+    prepareButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const interviewIndex = this.getAttribute('data-index');
+            const selectedInterview = student.interviews[interviewIndex];
+            showPreparationModal(selectedInterview);
+        });
+    });
+}
+           
+document.addEventListener('DOMContentLoaded', function () {
+    const forgotPasswordLink = document.querySelector('a[href="#forgot-password"]');
+    const forgotPasswordModal = document.getElementById('forgot-password-modal');
+    const closeForgotPasswordModal = document.getElementById('close-forgot-password-modal');
+    const forgotPasswordForm = document.getElementById('forgot-password-form');
+
+    // Show the modal when the "Forgot Password" link is clicked
+    forgotPasswordLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        forgotPasswordModal.style.display = 'block';
+    });
+
+    // Close the modal when the "Close" button is clicked
+    closeForgotPasswordModal.addEventListener('click', function () {
+        forgotPasswordModal.style.display = 'none';
+    });
+
+    // Handle the form submission
+    forgotPasswordForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const resetEmail = document.getElementById('reset-email').value.trim();
+
+        if (!resetEmail) {
+            alert('Please enter your email or registration number.');
+            return;
+        }
+
+        // Simulate sending a reset link
+        alert(`A password reset link has been sent to ${resetEmail}.`);
+        forgotPasswordModal.style.display = 'none';
+    });
+});
+
+function showPreparationModal(interview) {
+    const modal = document.getElementById('prepare-modal');
+    const questionsContainer = document.getElementById('interview-questions');
+
+    // Example questions (you can replace this with dynamic data)
+    const questions = [
+        "What are your strengths and weaknesses?",
+        "Explain a challenging project you worked on.",
+        "How do you handle tight deadlines?",
+        "What do you know about our company?",
+        "Why should we hire you?"
+    ];
+
+    questionsContainer.innerHTML = `
+        <h3>Questions for ${interview.company}</h3>
+        <ul>
+            ${questions.map(question => `<li>${question}</li>`).join('')}
+        </ul>
+    `;
+
+    modal.style.display = 'block';
+
+    // Close modal
+    const closeModalButton = document.getElementById('close-prepare-modal');
+    closeModalButton.addEventListener('click', function () {
+        modal.style.display = 'none';
+    });
+}
 
                 // Function to display recommended jobs
                 function displayRecommendedJobs(student) {
-                    const jobsContainer = document.getElementById('recommended-jobs');
-                    jobsContainer.innerHTML = '';  // Clear previous content
-                    student.recommendedJobs.forEach(job => {
-                        const jobCard = `
-                            <div class="job-card">
-                                <h3>${job.title}</h3>
-                                <p class="company">${job.company}</p>
-                                <p class="location">📍 ${job.company.includes("Remote") ? "Remote" : "On-site"}</p>
-                                <p class="salary">💰 Salary: Not disclosed</p>
-                                <div class="tags">
-                                    ${job.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                                </div>
-                                <p>📅 Deadline: ${job.deadline}</p>
-                                <p>${job.description}</p>
-                                <a href="#job-detail" class="btn">Apply Now</a>
-                            </div>
-                        `;
-                        jobsContainer.innerHTML += jobCard;
-                    });
-                }
+    const jobsContainer = document.getElementById('recommended-jobs');
+    jobsContainer.innerHTML = ''; // Clear previous content
+    student.recommendedJobs.forEach((job, index) => {
+        const jobCard = `
+            <div class="job-card">
+                <h3>${job.title}</h3>
+                <p class="company">${job.company}</p>
+                <p class="location">📍 ${job.company.includes("Remote") ? "Remote" : "On-site"}</p>
+                <p class="salary">💰 Salary: Not disclosed</p>
+                <div class="tags">
+                    ${job.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+                <p>📅 Deadline: ${job.deadline}</p>
+                <p>${job.description}</p>
+                <button class="btn apply-now-btn" data-index="${index}">Apply Now</button>
+            </div>
+        `;
+        jobsContainer.innerHTML += jobCard;
+    });
+
+    // Add event listeners to "Apply Now" buttons
+    const applyNowButtons = document.querySelectorAll('.apply-now-btn');
+    applyNowButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const jobIndex = this.getAttribute('data-index');
+            const selectedJob = student.recommendedJobs[jobIndex];
+            redirectToApplicationForm(student, selectedJob);
+        });
+    });
+}
+function redirectToApplicationForm(student, job) {
+    // Hide the dashboard and show the application form
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('application-form').style.display = 'block';
+
+    // Pre-fill the application form with user and job details
+    document.getElementById('applicant-name').value = student.name;
+    document.getElementById('applicant-email').value = student.email;
+    document.getElementById('applicant-branch').value = student.branch;
+    document.getElementById('job-title').value = job.title;
+    document.getElementById('job-company').value = job.company;
+    document.getElementById('job-description').value = job.description;
+}
 
                 // Toggle between login and register forms
                 const formTabs = document.querySelectorAll('.form-tab');
@@ -979,26 +1524,48 @@
 
                 // Handle login
                 loginForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    const regNumber = document.getElementById('reg-number').value;
-                    const password = document.getElementById('password').value;
+    e.preventDefault();
+    const regNumber = document.getElementById('reg-number').value;
+    const password = document.getElementById('password').value;
 
-                    if (password !== "0000") {
-                        alert('Invalid Password. Use 0000 as the universal password.');
-                        return;
-                    }
+    if (password !== "0000") {
+        alert('Invalid Password. Use 0000 as the universal password.');
+        return;
+    }
 
-                    const student = getStudentData(regNumber);
-                    if (student) {
-                        document.getElementById('login').style.display = 'none';
-                        document.getElementById('dashboard').style.display = 'block';
-                        displayStudentDetails(student);
-                        displayUpcomingInterviews(student);
-                        displayRecommendedJobs(student);
-                    } else {
-                        alert('Invalid Registration Number');
-                    }
-                });
+    const student = getStudentData(regNumber);
+    if (student) {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        displayStudentDetails(student);
+        displayUpcomingInterviews(student);
+        displayRecommendedJobs(student);
+
+        // Change the login button to a logout button
+        const authButton = document.getElementById('auth-button');
+        authButton.textContent = 'Logout';
+        authButton.href = '#';
+        authButton.addEventListener('click', handleLogout);
+    } else {
+        alert('Invalid Registration Number');
+    }
+});
+function handleLogout() {
+    const confirmation = confirm("Are you sure you want to logout?");
+    if (confirmation) {
+        // Reset the UI
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('login').style.display = 'block';
+
+        // Change the logout button back to a login button
+        const authButton = document.getElementById('auth-button');
+        authButton.textContent = 'Login';
+        authButton.href = './index.html';
+        authButton.removeEventListener('click', handleLogout);
+
+        alert('You have been logged out successfully!');
+    }
+}
 
                 // Handle registration
                 const registerFormElement = document.getElementById('register-form');
@@ -1047,7 +1614,22 @@
                                 tags: ["JavaScript", "React", "Node.js"],
                                 deadline: "2024-09-15",
                                 description: "Entry-level position for fresh graduates to work on web applications."
-                            }
+                            },
+                            {
+                                title: "Graduate Engineer Trainee",
+                                company: "Innovate Engineering",
+                                minCGPA: 7.0,
+                                tags: ["Engineering", "Training", "Development"],
+                                deadline: "2024-09-30",
+                                description: "Comprehensive training program for fresh engineering graduates."
+                            },{
+            title: "DevSecOps Engineer",
+            company: "ShieldWare Technologies",
+            minCGPA: 8.8,
+            tags: ["DevOps", "Docker", "OWASP"],
+            deadline: "2024-07-27",
+            description: "Integrate security practices into CI/CD workflows."
+        }
                         ];
                     } else if (branch.includes("Electronics") || branch.includes("ECE")) {
                         newStudent.recommendedJobs = [
@@ -1058,7 +1640,15 @@
                                 tags: ["VLSI", "Verilog", "FPGA"],
                                 deadline: "2024-09-10",
                                 description: "Design and implement VLSI circuits for modern applications."
-                            }
+                            },
+                            {
+            title: "DevSecOps Engineer",
+            company: "ShieldWare Technologies",
+            minCGPA: 8.8,
+            tags: ["DevOps", "Docker", "OWASP"],
+            deadline: "2024-07-27",
+            description: "Integrate security practices into CI/CD workflows."
+        }
                         ];
                     } else {
                         newStudent.recommendedJobs = [
@@ -1069,7 +1659,14 @@
                                 tags: ["Engineering", "Training", "Development"],
                                 deadline: "2024-09-30",
                                 description: "Comprehensive training program for fresh engineering graduates."
-                            }
+                            },{
+            title: "DevSecOps Engineer",
+            company: "ShieldWare Technologies",
+            minCGPA: 8.8,
+            tags: ["DevOps", "Docker", "OWASP"],
+            deadline: "2024-07-27",
+            description: "Integrate security practices into CI/CD workflows."
+        }
                         ];
                     }
 
@@ -1083,6 +1680,68 @@
                     formTabs[0].click(); // Click the login tab
                 });
             });
+            document.addEventListener('DOMContentLoaded', function () {
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotContainer = document.getElementById('chatbot-container');
+    const chatbotClose = document.getElementById('chatbot-close');
+    const chatbotForm = document.getElementById('chatbot-form');
+    const chatbotInput = document.getElementById('chatbot-input');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+
+    // Toggle chatbot visibility
+    chatbotToggle.addEventListener('click', () => {
+    chatbotContainer.style.display = 'flex';
+    chatbotToggle.style.display = 'none';
+});
+
+chatbotClose.addEventListener('click', () => {
+    chatbotContainer.style.display = 'none';
+    chatbotToggle.style.display = 'block';
+});
+
+    // Handle chatbot messages
+    chatbotForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const userMessage = chatbotInput.value.trim();
+    if (!userMessage) return;
+
+    // Display user message
+    displayMessage(userMessage, 'user-message');
+
+    // Process bot response
+    const botResponse = getBotResponse(userMessage);
+    setTimeout(() => {
+        displayMessage(botResponse, 'bot-message');
+    }, 500);
+
+    chatbotInput.value = '';
+});
+
+    // Display a message in the chatbot
+    function displayMessage(message, className) {
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${className}`;
+    messageElement.textContent = message;
+    chatbotMessages.appendChild(messageElement);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+    // Generate bot response
+    function getBotResponse(userMessage) {
+    const lowerCaseMessage = userMessage.toLowerCase();
+
+    if (lowerCaseMessage.includes('job')) {
+        return 'You can find job recommendations in the "Recommended Jobs" section of your dashboard.';
+    } else if (lowerCaseMessage.includes('interview')) {
+        return 'Check the "Upcoming Interviews" section for your scheduled interviews.';
+    } else if (lowerCaseMessage.includes('register')) {
+        return 'To register, click on the "Register" tab and fill out the form.';
+    } else if (lowerCaseMessage.includes('cgpa')) {
+        return 'Your CGPA is displayed in the "Academic Performance" section of your dashboard.';
+    } else {
+        return 'I am here to assist you with job recommendations, interviews, and registration. How can I help you?';
+    }
+}
+});
         </script>
 </body>
 

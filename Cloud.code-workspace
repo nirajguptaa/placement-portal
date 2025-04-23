@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../Cloud"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../my-react-movieDB-master"
+		}
+	],
+	"settings": {
+		"liveServer.settings.port": 5501,
+		"liveServer.settings.multiRootWorkspaceName": "Cloud"
+	}
+}
